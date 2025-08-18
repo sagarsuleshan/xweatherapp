@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
-const API_KEY = 'a6b25fe79a2f449a941180722251808';
+const API_KEY = "a6b25fe79a2f449a941180722251808";
 
 function App() {
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -16,15 +16,18 @@ function App() {
     setWeather(null);
 
     try {
-      const response = await axios.get('https://api.weatherapi.com/v1/current.json', {
-        params: {
-          key: API_KEY,
-          q: city
+      const response = await axios.get(
+        "https://api.weatherapi.com/v1/current.json",
+        {
+          params: {
+            key: API_KEY,
+            q: city,
+          },
         }
-      });
+      );
       setWeather(response.data.current);
     } catch (error) {
-      alert('Failed to fetch weather data');
+      alert("Failed to fetch weather data");
     } finally {
       setLoading(false);
     }
@@ -39,16 +42,26 @@ function App() {
         onChange={(e) => setCity(e.target.value)}
         placeholder="Enter city name"
       />
-      <button onClick={fetchWeather}>Search</button>
+      <button onClick={fetchWeather} disabled={loading}>
+        Search
+      </button>
 
       {loading && <p>Loading data…</p>}
 
       {weather && !loading && (
         <div className="weather-cards">
-          <div className="weather-card">Temperature <br /> {weather.temp_c}°C</div>
-          <div className="weather-card">Humidity <br /> {weather.humidity}%</div>
-          <div className="weather-card">Condition <br /> {weather.condition.text}</div>
-          <div className="weather-card">Wind Speed <br /> {weather.wind_kph} kph</div>
+          <div className="weather-card">
+            Temperature <br /> {weather.temp_c}°C
+          </div>
+          <div className="weather-card">
+            Humidity <br /> {weather.humidity}%
+          </div>
+          <div className="weather-card">
+            Condition <br /> {weather.condition.text}
+          </div>
+          <div className="weather-card">
+            Wind Speed <br /> {weather.wind_kph} kph
+          </div>
         </div>
       )}
     </div>
