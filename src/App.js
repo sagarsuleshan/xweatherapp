@@ -43,7 +43,7 @@ function App() {
 
       {loading && <p>Loading data…</p>}
 
-      {weather && (
+      {weather && !loading && (
         <div className="weather-cards">
           <div className="weather-card">Temperature <br /> {weather.temp_c}°C</div>
           <div className="weather-card">Humidity <br /> {weather.humidity}%</div>
