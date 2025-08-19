@@ -46,7 +46,7 @@ function App() {
         Search
       </button>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p>Loading data...</p>}
 
       {weather && !loading && (
         <div className="weather-cards">
